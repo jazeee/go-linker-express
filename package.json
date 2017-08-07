@@ -1,0 +1,33 @@
+{
+  "name": "go-linker-express",
+  "version": "1.0.0",
+  "description": "Node Express server that provides shortened URL links",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test-all": "jest --watch",
+    "test": "jest"
+  },
+  "author": "jsingh",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.14.0",
+    "http-status-codes": "^1.1.6",
+    "node-fetch": "^1.6.3",
+    "qs": "^6.4.0",
+    "validator": "^6.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-jest": "^19.0.0",
+    "babel-polyfill": "^6.23.0",
+    "jest-cli": "^19.0.2",
+    "jest-jasmine2": "^19.0.2",
+    "nodemon": "^1.11.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "private": true
+}

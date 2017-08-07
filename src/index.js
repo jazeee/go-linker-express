@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import goLinkRoutes from './go-links';
+import {goLinkRoutes} from './go-links';
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));

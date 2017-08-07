@@ -1,13 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {goLinkRoutes} from './go-links';
+import {optionsHandler} from './options';
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 const config = {
 	port: 42666,
-}
+};
+
+optionsHandler(app);
 
 app.get('/', (req, res) => {
 	res.send('Hello world');
@@ -16,5 +19,5 @@ app.get('/', (req, res) => {
 goLinkRoutes(app);
 
 app.listen(config.port, () => {
-  console.log(`Server is running on ${config.port}`);
+	console.info(`Server is running on ${config.port}`);
 });

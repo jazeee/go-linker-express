@@ -29,4 +29,18 @@ describe('GoLinks', () => {
 		expect(goLinks.links.get('jazeee')).toBeUndefined();
 		expect(goLinks.links.get('jazeee2')).toBe('http://www.jazeee.com/2');
 	});
+	it('should toArray', () => {
+		let goLinks = new GoLinks();
+		goLinks.set('jazeee', 'http://www.jazeee.com');
+		goLinks.set('jazeee2', 'http://www.jazeee.com/2');
+		expect(goLinks.toArray()).toEqual([
+			{
+				name: 'jazeee',
+				url: 'http://www.jazeee.com',
+			}, {
+				name: 'jazeee2',
+				url: 'http://www.jazeee.com/2',
+			},
+		]);
+	});
 });

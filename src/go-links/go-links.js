@@ -20,6 +20,12 @@ class GoLinks {
 		}
 		this.links.delete(name);
 	}
+	toArray = () => {
+		return [...this.links.keys()].map( (name) => {
+			const url = this.links.get(name);
+			return {name, url};
+		});
+	}
 }
 
 export {GoLinks};

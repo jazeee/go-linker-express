@@ -5,30 +5,30 @@ let goLinks = new GoLinks();
 const goLinkRoutes = (app) => {
 	app.get('/api/v1/go-links', (req, res) => {
 		res.set('Content-Type', 'application/javascript');
-		res.send(JSON.stringify({goLinks}));
+		res.send({links: goLinks.toArray()});
 	});
 	app.get('/api/v1/go-links/:id', (req, res) => {
 		res.set('Content-Type', 'application/javascript');
-		res.send(JSON.stringify({goLinks}));
+		res.send({links: goLinks.toArray()});
 	});
 	app.post('/api/v1/go-links', (req, res) => {
 		const {name, url} = req.body;
 		goLinks.set(name, url);
 		res.set('Content-Type', 'application/javascript');
-		res.send(JSON.stringify({goLinks}));
+		res.send({links: goLinks.toArray()});
 	});
 	app.put('/api/v1/go-links/:id', (req, res) => {
 		const {id} = req.params;
 		const {url} = req.body;
 		goLinks.set(id, url);
 		res.set('Content-Type', 'application/javascript');
-		res.send(JSON.stringify({goLinks}));
+		res.send({links: goLinks.toArray()});
 	});
 	app.delete('/api/v1/go-links/:id', (req, res) => {
 		const {id} = req.params;
 		goLinks.delete(id);
 		res.set('Content-Type', 'application/javascript');
-		res.send(JSON.stringify({goLinks}));
+		res.send({links: goLinks.toArray()});
 	});
 
 	// Redirector:

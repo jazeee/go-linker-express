@@ -7,10 +7,12 @@ const corsHandlers = (app) => {
 		res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 		res.sendStatus(200);
 	});
-	app.get('/*', function(req, res, next) {
-		res.header('Access-Control-Allow-Origin', '*');
-		next();
-	});
+	['get', 'post', 'put', 'patch', 'delete'].forEach( method =>
+		app[method]('/*', function(req, res, next) {
+			res.header('Access-Control-Allow-Origin', '*');
+			next();
+		})
+	)
 };
 
 export {corsHandlers};

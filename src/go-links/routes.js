@@ -8,27 +8,40 @@ const goLinkRoutes = (app) => {
 		res.send({links: goLinks.toArray()});
 	});
 	app.get('/api/v1/go-links/:id', (req, res) => {
+		const {id} = req.params;
 		res.set('Content-Type', 'application/javascript');
-		res.send({links: goLinks.toArray()});
+		const link = goLinks.get(id);
+		if (link !== undefined) {
+			return res.send({name: id, link});
+		}
+		return res.status(404).send({error: `Could not find link for '${id}'`});
 	});
 	app.post('/api/v1/go-links', (req, res) => {
 		const {name, url} = req.body;
-		goLinks.set(name, url);
+		const id = goLinks.set(name, url);
 		res.set('Content-Type', 'application/javascript');
-		res.send({links: goLinks.toArray()});
+		return res.send({message: `Saved '${id}'`, id, link: goLinks.get(id)});
 	});
 	app.put('/api/v1/go-links/:id', (req, res) => {
 		const {id} = req.params;
 		const {url} = req.body;
-		goLinks.set(id, url);
-		res.set('Content-Type', 'application/javascript');
-		res.send({links: goLinks.toArray()});
+		const link = goLinks.get(id);
+		if (link !== undefined) {
+			goLinks.set(id, url);
+			res.set('Content-Type', 'application/javascript');
+			return res.send({message: `Saved '${id}'`, id, link: goLinks.get(id)});
+		}
+		return res.status(404).send({error: `Could not find link for '${id}'`});
 	});
 	app.delete('/api/v1/go-links/:id', (req, res) => {
 		const {id} = req.params;
-		goLinks.delete(id);
-		res.set('Content-Type', 'application/javascript');
-		res.send({links: goLinks.toArray()});
+		const link = goLinks.get(id);
+		if (link !== undefined) {
+			goLinks.delete(id);
+			res.set('Content-Type', 'application/javascript');
+			return res.send({message: `Deleted '${id}'`});
+		}
+		return res.status(404).send({error: `Could not find link for '${id}'`});
 	});
 
 	// Redirector:

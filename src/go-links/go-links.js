@@ -13,6 +13,7 @@ class GoLinks {
 			throw new Error('Must provide name and path');
 		}
 		this.links.set(name, path);
+		return name;
 	}
 	delete = (name) => {
 		if (!name) {

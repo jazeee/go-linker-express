@@ -12,7 +12,7 @@ const corsHandlers = (app) => {
 			res.header('Access-Control-Allow-Origin', '*');
 			next();
 		})
-	)
+	);
 };
 
 export {corsHandlers};

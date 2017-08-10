@@ -5,6 +5,7 @@ import {corsHandlers} from './cors-handlers';
 
 const app = express();
 app.use(bodyParser.json());
+let router = express.Router();
 
 const config = {
 	port: 42666,
@@ -16,7 +17,8 @@ app.get('/', (req, res) => {
 	res.send('Hello world');
 });
 
-goLinkRoutes(app);
+goLinkRoutes(app, router);
+app.use('/api/v1', router);
 
 app.listen(config.port, () => {
 	console.info(`Server is running on ${config.port}`);

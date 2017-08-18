@@ -14,7 +14,13 @@ const goLinkRoutes = (app, router) => {
 		.post((req, res) => {
 			const {name, url} = req.body;
 			const id = goLinks.set(name, url);
-			return res.send({message: `Saved '${id}'`, id, link: goLinks.get(id)});
+			return res.send({
+				message: `Saved '${id}'`,
+				link: {
+					id,
+					url: goLinks.get(id)
+				},
+			});
 		});
 
 	router.route('/go-links/:id')
@@ -24,9 +30,14 @@ const goLinkRoutes = (app, router) => {
 		})
 		.get((req, res) => {
 			const {id} = req.params;
-			const link = goLinks.get(id);
-			if (link !== undefined) {
-				return res.send({name: id, link});
+			const url = goLinks.get(id);
+			if (url !== undefined) {
+				return res.send({
+					link: {
+						name: id,
+						url
+					},
+				});
 			}
 			return res.status(404).send({error: `Could not find link for '${id}'`});
 		})
@@ -36,7 +47,13 @@ const goLinkRoutes = (app, router) => {
 			const link = goLinks.get(id);
 			if (link !== undefined) {
 				goLinks.set(id, url);
-				return res.send({message: `Saved '${id}'`, id, link: goLinks.get(id)});
+				return res.send({
+					message: `Updated '${id}'`,
+					link: {
+						id,
+						url: goLinks.get(id)
+					},
+				});
 			}
 			return res.status(404).send({error: `Could not find link for '${id}'`});
 		})

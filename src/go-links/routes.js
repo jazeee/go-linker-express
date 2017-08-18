@@ -18,7 +18,7 @@ const goLinkRoutes = (app, router) => {
 				message: `Saved '${id}'`,
 				link: {
 					id,
-					url: goLinks.get(id)
+					url: goLinks.get(id),
 				},
 			});
 		});
@@ -35,7 +35,7 @@ const goLinkRoutes = (app, router) => {
 				return res.send({
 					link: {
 						name: id,
-						url
+						url,
 					},
 				});
 			}
@@ -51,7 +51,7 @@ const goLinkRoutes = (app, router) => {
 					message: `Updated '${id}'`,
 					link: {
 						id,
-						url: goLinks.get(id)
+						url: goLinks.get(id),
 					},
 				});
 			}
